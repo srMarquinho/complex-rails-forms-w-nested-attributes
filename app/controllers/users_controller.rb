@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
 
     if @user.save
       redirect_to @user
@@ -25,5 +25,11 @@ class UsersController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(users_attributes: [:address])
   end
 end
